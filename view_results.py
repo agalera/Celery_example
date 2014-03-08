@@ -3,9 +3,9 @@ import sys
 def check_id(id):
     con = lite.connect('celery_db.sqlite3')
     cur = con.cursor()
-    cur.execute('SELECT * FROM result WHERE ID = '+str(id))
+    cur.execute('SELECT * FROM results WHERE task_id = '+str(id))
     try:
-    	return cur.fetchall()[0][1]
+    	return cur.fetchall()
     except:
         print "no exist"
 

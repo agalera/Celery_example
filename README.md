@@ -11,7 +11,7 @@ Tutorial:
 
 3. create db (python create_db.py)
 
-4. start celery (celery worker -A tasks)
+4. start celery (celery multi start 2 -A tasks -l info -c4 --pidfile=%n.pid)
 
 5. insert task (python launch_task.py)
 
