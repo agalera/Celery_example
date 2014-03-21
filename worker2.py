@@ -1,15 +1,7 @@
 from celery import Celery
 import sqlite3 as lite
 import time
-app = Celery('tasks', broker='amqp://guest@localhost//')
-                                                                                                                                      
-@app.task
-def add(id, lista):
-    print "nivel_1 init task"
-    for tarea in lista:
-        add_level_2.delay(id, tarea)
-    print "nivel_1 finish task"
-    return True
+app = Celery('worker2', broker='amqp://guest@localhost//')
                                                                                                                                       
 def add_result(id, value):
     while True:
@@ -23,8 +15,8 @@ def add_result(id, value):
             print "no puedo insertar, db bloqueada"
             time.sleep(1)
                                                                                                                                       
-@app.task
-def add_level_2(id, lista):
+@app.task(queue='nivel2')
+def add(id, lista):
     print "Nivel_2 init task"
     resultado = 0
     for value in lista:
