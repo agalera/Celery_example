@@ -1,4 +1,4 @@
-from tasks import add
+from worker1 import add
 import sqlite3 as lite
 
 con = lite.connect('celery_db.sqlite3')
